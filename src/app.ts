@@ -3,13 +3,29 @@ const AMAZON = `https://www.amazon.com/`
 
 import inquirer from "inquirer"
 import puppeteer, { Browser } from "puppeteer"
-//
+
+/*Utils*/
+interface TGenre {
+  title: string
+  slug: string
+}
+// user Choices
+async function getUserChoice(name: string, message: string, choices: string[]) {
+  return await inquirer.prompt([
+    {
+      name: name,
+      type: "list",
+      message: message,
+      choices: choices,
+    },
+  ])
+}
 //Genre class
 interface IGenre {
-  getGenres(): Promise<any[]>
+  getGenres(): Promise<TGenre[]>
 }
 class Genre implements IGenre {
-  async getGenres(): Promise<any[]> {
+  async getGenres(): Promise<TGenre[]> {
     const browser = await puppeteer.launch({ headless: false })
     const page = await browser.newPage()
 
@@ -25,7 +41,7 @@ class Genre implements IGenre {
         title: el.childNodes[0].textContent?.trim(),
       }))
     })
-    const allGenres: any[] = genres.map((el) => ({
+    const allGenres: TGenre[] = genres.map((el) => ({
       slug: el.slug!,
       title: el.title!,
     }))
@@ -37,8 +53,21 @@ const app = async () => {
   const genres = new Genre()
   const genresWithSlug = await genres.getGenres()
 
-  console.log(genresWithSlug)
-  throw new Error("everything works fine")
+  //strip slugs from Genres[]
+  const genresWithoutSlug = genresWithSlug.map((el: TGenre) => el.title)
+  //Get user genre choice
+  const genresChoice = await getUserChoice(
+    "genre",
+    "Choose a Genre",
+    genresWithoutSlug
+  )
+  const userChoice = genresChoice.genre
+  const userChoiceWithSlug = genresWithSlug.filter(
+    (url) => url.title === userChoice
+  )
+  console.log(userChoiceWithSlug)
+
+  // throw new Error("everything works fine")
 }
 
 app().catch((err) => console.log(err))
