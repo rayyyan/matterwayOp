@@ -9,14 +9,18 @@ export interface IBook {
 export default class Book implements IBook {
   constructor(private url: string) {}
   async getRandomBook(): Promise<string> {
-    const page = await initBrowser(this.url, true)
-    const books = await page.evaluate(() => {
-      return Array.from(document.querySelectorAll(".pollAnswer__bookLink")).map(
-        (el) => el.getElementsByTagName("img")[0].alt
-      )
-    })
+    try {
+      const page = await initBrowser(this.url, true)
+      const books = await page.evaluate(() => {
+        return Array.from(
+          document.querySelectorAll(".pollAnswer__bookLink")
+        ).map((el) => el.getElementsByTagName("img")[0].alt)
+      })
 
-    return randomBook(books)
+      return randomBook(books)
+    } catch (err) {
+      throw new Error("Can't get random book")
+    }
   }
   async checkout(book: string) {
     const page = await initBrowser(AMAZON, false)
