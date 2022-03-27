@@ -1,5 +1,4 @@
 const GOOD_READS = `https://www.goodreads.com/choiceawards/best-books-2020`
-const AMAZON = `https://www.amazon.com/`
 import puppeteer, { Browser } from "puppeteer"
 import { initBrowser } from "../utils/browser"
 export interface TGenre {
@@ -10,6 +9,7 @@ export interface TGenre {
 interface IGenre {
   getGenres(): Promise<TGenre[]>
 }
+
 export default class Genre implements IGenre {
   async getGenres(): Promise<TGenre[]> {
     const page = await initBrowser(GOOD_READS, true)
