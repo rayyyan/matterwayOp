@@ -83,11 +83,11 @@ export default class Book implements IBook {
       //check Book options
       const options = bookCheck(bookOptions, page)
       //handleBook checking
+      const readyForCheckout = await isValidCheckout(options, page)
       // here pass exceptions
       await surf(Exceptions.NOT_AVAILABLE, page)
 
       //
-      const readyForCheckout = await isValidCheckout(options, page)
       await this.proceedToCheckout(readyForCheckout, page)
       return page
     } catch (error) {
