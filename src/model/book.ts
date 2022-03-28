@@ -58,7 +58,7 @@ export default class Book implements IBook {
       await product[0].click()
 
       // here pass exceptions
-      await surf(Exceptions.SEE_BUYING_OPTIONS, page)
+      await surf(Exceptions.HARDCOVER_ONLY, page)
 
       return page
     } catch (error) {

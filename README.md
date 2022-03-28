@@ -25,6 +25,17 @@ The challenge is to automate the process of choosing a random book from a select
 
 ## Screenshots
 
-![](./screenshots/1.png)
+1. Location
+   ![](./images/location.png)
 
-![](./screenshots/2.png)
+1. No Buying Options
+   ![](./images/noBuyingOptions.png)
+
+1. NotAvailable
+   ![](./images/notAvailable.png)
+
+1. SeeAllOptionD
+   ![](./images/seeAllOptionD.png)
+
+1. Normal checkout
+   ![](./images/normalCheckout.png)

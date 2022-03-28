@@ -15,7 +15,7 @@ export class Modal {
         modal.innerHTML = `<style>
             #modal-content-matterway{
               position: fixed; 
-              z-index: 1; 
+              z-index: 350; 
               left: 0;
               top: 0;
               width: 100%; 
