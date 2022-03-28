@@ -10,9 +10,9 @@ import { IArray } from "../types/interfaces"
  * @param page  Puppeteer page
  * @returns {Promise<void | never>} if it includes the element
  */
-export async function surf(url: string, page: Page): Promise<void | never> {
+export async function surf(url: string, page: Page): Promise<any | never> {
   try {
-    await page.goto(url, {
+    return await page.goto(url, {
       timeout: 0,
       waitUntil: "networkidle2",
     })

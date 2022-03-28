@@ -12,7 +12,42 @@ export class Modal {
       await page.evaluate((error) => {
         const modal = document.createElement("div")
         modal.id = "modal-content-matterway"
-        modal.innerHTML = `${AllConst.MODAL_STYLE}
+        modal.innerHTML = `<style>
+            #modal-content-matterway{
+              position: fixed; 
+              z-index: 1; 
+              left: 0;
+              top: 0;
+              width: 100%; 
+              height: 100%; 
+              overflow: auto; 
+              background-color: rgb(0,0,0); 
+              background-color: rgba(0,0,0,0.4)
+            }
+            .modal-content-matterway{
+              background-color: #fefefe;
+              margin: 22% auto;
+              padding: 20px;
+              border: 1px solid #888;
+              width: 80%;
+              position: relative;
+              min-height: 100px;
+              display: flex;
+              align-items: center;
+          }
+            
+            .my-close{
+              position: absolute;
+              right: 5px;
+              top: 3px;
+              font-size: 32px;
+              cursor: pointer;
+            }
+            #matterway{
+              position: absolute;
+              left: top: 3px;
+            }
+            </style>
             <div class="modal-content-matterway">
             <img id="matterway" src="https://media-exp1.licdn.com/dms/image/C4D0BAQF8L0yk2jHoWQ/company-logo_200_200/0/1545320555771?e=2159024400&amp;v=beta&amp;t=YMk5zxTfdQGWA1iUq68cuOouJHuqpte79LIlp_kFkvM" style="width: 50px; height: 50px; margin: 5px;">
             <span class="my-close">&times;</span>
