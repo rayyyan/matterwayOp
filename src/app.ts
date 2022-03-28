@@ -28,7 +28,7 @@ const app = async (): Promise<void> => {
   //Book
   const book = new Book(AllConst.GOOD_BASE + userChoiceWithSlug[0].slug)
   const getRandomBook = await book.getRandomBook()
-  const checkout = await book.checkout(getRandomBook)
+  await book.checkout(getRandomBook)
 }
 
 app().catch((err) => console.log(err))
