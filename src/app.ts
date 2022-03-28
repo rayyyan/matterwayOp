@@ -18,7 +18,6 @@ const app = async (): Promise<void> => {
     "Choose a Genre",
     genresWithoutSlug
   )
-  console.log(genresChoice)
 
   const userChoice = genresChoice.genre
   const userChoiceWithSlug = genresWithSlug.filter(

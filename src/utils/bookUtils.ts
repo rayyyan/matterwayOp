@@ -4,6 +4,12 @@ import { IIsValidCheckout, TError } from "../types/types"
 import { IArray } from "../types/interfaces"
 
 //surf
+/**
+ * @function surf
+ * @param url  url
+ * @param page  Puppeteer page
+ * @returns {Promise<void | never>} if it includes the element
+ */
 export async function surf(url: string, page: Page): Promise<void | never> {
   try {
     await page.goto(url, {
@@ -15,10 +21,24 @@ export async function surf(url: string, page: Page): Promise<void | never> {
   }
 }
 //Is Valid checkout
+
+/**
+ * @function arrayIncludes
+ * @param arr Array of elements
+ * @returns {boolean} if it includes the element
+ */
 export function arrayIncludes(arr: IArray[], str: string): boolean {
   return arr.map((el) => el.name).includes(str)
 }
+
 let error: TError = { message: null, isSeeOPtion: false }
+
+/**
+ * @function arrayIncludes
+ * @param options Array of interface
+ * @param page  Puppeteer page
+ * @returns {Promise<TError | never>} if it includes the element
+ */
 export async function isValidCheckout(
   options: IIsValidCheckout[],
   page: Page
@@ -95,6 +115,12 @@ export async function isValidCheckout(
     throw new Error("is not Valid Checkout")
   }
 }
+/**
+ * @function arrayIncludes
+ * @param bookOptions of interface
+ * @param page  Puppeteer page
+ * @returns {(IArray | undefined)[] | never} if it includes the element
+ */
 export function bookCheck(
   bookOptions: IArray[],
   page: Page
