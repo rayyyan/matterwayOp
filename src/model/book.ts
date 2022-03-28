@@ -2,8 +2,8 @@ import puppeteer from "puppeteer"
 import { initBrowser } from "../utils/browser"
 import { randomBook } from "../utils/randomBook"
 import { Modal } from "../utils/errorTemplates"
-import { AllConst } from "../utils/constants"
-import { isValidCheckout, bookCheck } from "../utils/bookUtils"
+import { AllConst, Exceptions } from "../utils/constants"
+import { isValidCheckout, bookCheck, surf } from "../utils/bookUtils"
 //Types
 import { TError } from "../types/types"
 import { IArray } from "../types/interfaces"
@@ -84,6 +84,9 @@ export default class Book implements IBook {
       const options = bookCheck(bookOptions, page)
       //handleBook checking
       const readyForCheckout = await isValidCheckout(options, page)
+      // here pass exceptions
+      surf(Exceptions.HARDCOVER_ONLY, page)
+      //
       await this.proceedToCheckout(readyForCheckout, page)
       return page
     } catch (error) {
