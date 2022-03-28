@@ -4,8 +4,8 @@
   "description": "Matterway Op",
   "main": "./dist/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
+    "build": "tsc",
     "dev": "tsc -w"
   },
   "repository": {

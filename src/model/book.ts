@@ -10,7 +10,16 @@ import { IArray } from "../types/interfaces"
 
 //amazon
 const AMAZON = AllConst.AMAZON
-
+/**
+ * @class Book
+ * @description handle book checkout
+ * @method getRandomBook @returns { Promise<string | never>}
+ * @method searchBook @returns {  Promise<puppeteer.Page | never>}
+ * @method bookStatus @returns {  Promise<puppeteer.Page | never>}
+ * @method checkout @returns {  Promise<void | never>}
+ * @method proceedToCheckout @param options: TError,
+     @param page: puppeteer.Page @returns {  Promise<void | never>}
+ */
 export interface IBook {
   getRandomBook(): Promise<string | never>
   checkout(book: string): void
