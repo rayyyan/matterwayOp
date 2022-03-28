@@ -12,10 +12,11 @@ import { IArray } from "../types/interfaces"
  */
 export async function surf(url: string, page: Page): Promise<any | never> {
   try {
-    return await page.goto(url, {
+    await page.goto(url, {
       timeout: 0,
       waitUntil: "networkidle2",
     })
+    return page
   } catch (error) {
     throw new Error("can not surf")
   }

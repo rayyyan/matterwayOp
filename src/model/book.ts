@@ -57,6 +57,9 @@ export default class Book implements IBook {
       )
       await product[0].click()
 
+      // here pass exceptions
+      await surf(Exceptions.SEE_BUYING_OPTIONS, page)
+
       return page
     } catch (error) {
       throw new Error("Can't search book")
@@ -82,12 +85,9 @@ export default class Book implements IBook {
 
       //check Book options
       const options = bookCheck(bookOptions, page)
+
       //handleBook checking
       const readyForCheckout = await isValidCheckout(options, page)
-      // here pass exceptions
-      await surf(Exceptions.NOT_AVAILABLE, page)
-
-      //
       await this.proceedToCheckout(readyForCheckout, page)
       return page
     } catch (error) {
