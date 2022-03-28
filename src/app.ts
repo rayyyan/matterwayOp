@@ -1,10 +1,9 @@
 import Genre, { TGenre } from "./model/genre"
 import Book from "./model/book"
 import getUserChoice from "./utils/input"
-const GOOD_BASE = `https://www.goodreads.com`
+import { AllConst } from "./utils/constants"
 
-/*Utils*/
-const app = async () => {
+const app = async (): Promise<void> => {
   //Genre
   const genres = new Genre()
   const genresWithSlug = await genres.getGenres()
@@ -13,18 +12,21 @@ const app = async () => {
   const genresWithoutSlug = genresWithSlug.map((el: TGenre) => el.title)
 
   //Get user genre choice
+
   const genresChoice = await getUserChoice(
     "genre",
     "Choose a Genre",
     genresWithoutSlug
   )
+  console.log(genresChoice)
+
   const userChoice = genresChoice.genre
   const userChoiceWithSlug = genresWithSlug.filter(
     (url) => url.title === userChoice
   )
 
   //Book
-  const book = new Book(GOOD_BASE + userChoiceWithSlug[0].slug)
+  const book = new Book(AllConst.GOOD_BASE + userChoiceWithSlug[0].slug)
   const getRandomBook = await book.getRandomBook()
   const checkout = await book.checkout(getRandomBook)
 }

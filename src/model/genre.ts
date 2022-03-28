@@ -1,27 +1,38 @@
-const GOOD_READS = `https://www.goodreads.com/choiceawards/best-books-2020`
-import puppeteer, { Browser } from "puppeteer"
 import { initBrowser } from "../utils/browser"
+import { AllConst } from "../utils/constants"
+
+/**
+ * @class Genre
+ * @description get Genres
+ * @method getGenres
+ * @method @returns { Promise<TGenre[]| never>}
+ */
+
 export interface TGenre {
   title: string
   slug: string
 }
-//Genre class
 interface IGenre {
   getGenres(): Promise<TGenre[]>
 }
 
+//Genre class
 export default class Genre implements IGenre {
-  async getGenres(): Promise<TGenre[]> {
-    const page = await initBrowser(GOOD_READS, true)
-    const genres = await page.evaluate(() => {
-      return Array.from(
-        document.querySelectorAll(".category.clearFix > a")
-      ).map((el) => ({
-        slug: el.getAttribute("href"),
-        title: el.childNodes[0].textContent?.trim(),
-      }))
-    })
+  async getGenres(): Promise<TGenre[] | never> {
+    try {
+      const page = await initBrowser(AllConst.GOOD_READS, true)
+      const genres = await page.evaluate(() => {
+        return Array.from(
+          document.querySelectorAll(".category.clearFix > a")
+        ).map((el) => ({
+          slug: el.getAttribute("href"),
+          title: el.childNodes[0].textContent?.trim(),
+        }))
+      })
 
-    return genres as TGenre[]
+      return genres as TGenre[]
+    } catch (error) {
+      throw new Error("Can't get genres")
+    }
   }
 }
